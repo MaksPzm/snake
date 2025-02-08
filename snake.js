@@ -93,32 +93,32 @@ let direction = "ArrowUp"; // если эту переменную создае�
 window.addEventListener('keydown', function(e) {
 console.log('direction: ', direction);
 if (e.key == "ArrowUp" && (direction != 'ArrowDown')) {
-    console.log('e.key : ', e.key );
+    // console.log('e.key : ', e.key );
     direction = 'ArrowUp';
     console.log('true: ', true);
 } else if (e.key == "ArrowDown" && (direction != 'ArrowUp')) {
     console.log('e.key: ', e.key);
     true
-    console.log('true: ', true);
+    // console.log('true: ', true);
     direction = 'ArrowDown';
 } else if (e.key == "ArrowLeft" && direction != ('ArrowRight')) {
     console.log('e.key: ', e.key);
     true
-    console.log('true: ', true);
+    // console.log('true: ', true);
     direction = 'ArrowLeft';
 } else if (e.key == "ArrowRight"  && direction != ('ArrowLeft')) {
     console.log('e.key: ', e.key);
     true
-    console.log('true: ', true);
+    // console.log('true: ', true);
     direction = 'ArrowRight';
 }
 })
     
-    
+let snakeBody = Array.from(document.querySelectorAll('.snakeBody')); 
+
 function move() {      
-    let snakeBody = Array.from(document.querySelectorAll('.snakeBody'));
-    const coordinatesSnake = [snakeBody[0].getAttribute('data-X'), snakeBody[0].getAttribute('data-Y')];
-    console.log('direction: ', direction);
+    const coordinatesSnake = [snakeBody[0].getAttribute('data-X'), snakeBody[0].getAttribute('data-Y')];   
+    // console.log('direction: ', direction);
     // direction.splice(0, 2); // удаляем из массива лишние элементы при каждом нажатии
 
     console.log('coordinatesSnake: ', coordinatesSnake);
@@ -132,7 +132,7 @@ function move() {
         
         if (coordinatesSnake[1] < 10) {
             snakeBody.unshift(document.querySelector('[data-X = "' + coordinatesSnake[0] + '"][data-Y = "' + (+coordinatesSnake[1] + 1) + '"]'));
-            console.log('snakeBody2: ', snakeBody);  
+            // console.log('snakeBody2: ', snakeBody);  
         } else {
             snakeBody.unshift(document.querySelector('[data-X = "' + coordinatesSnake[0] + '"][data-Y = "1"]'));
         }   
@@ -141,7 +141,7 @@ function move() {
         
         if (coordinatesSnake[1] > 1) {
             snakeBody.unshift(document.querySelector('[data-X = "' + coordinatesSnake[0] + '"][data-Y = "' + (+coordinatesSnake[1] - 1) + '"]'));
-            console.log('snakeBody2: ', snakeBody);  
+            // console.log('snakeBody2: ', snakeBody);  
         } else {
             snakeBody.unshift(document.querySelector('[data-X = "' + coordinatesSnake[0] + '"][data-Y = "10"]'));
         }
@@ -150,7 +150,7 @@ function move() {
         
         if (coordinatesSnake[0] > 1) {
             snakeBody.unshift(document.querySelector('[data-X = "' + (+coordinatesSnake[0] - 1) + '"][data-Y = "' + coordinatesSnake[1] + '"]'));
-            console.log('snakeBody2: ', snakeBody);  
+            // console.log('snakeBody2: ', snakeBody);  
         } else {
             snakeBody.unshift(document.querySelector('[data-X = "10"][data-Y = "' + coordinatesSnake[1] + '"]'));
         } 
@@ -159,7 +159,7 @@ function move() {
         
         if (coordinatesSnake[0] < 10) {
             snakeBody.unshift(document.querySelector('[data-X = "' + (+coordinatesSnake[0] + 1) + '"][data-Y = "' + coordinatesSnake[1] + '"]'));
-            console.log('snakeBody2: ', snakeBody);  
+            // console.log('snakeBody2: ', snakeBody);  
         } else {
             snakeBody.unshift(document.querySelector('[data-X = "1"][data-Y = "' + coordinatesSnake[1] + '"]'));
         }
@@ -169,7 +169,45 @@ function move() {
     for (let i = 0; i < snakeBody.length; i++) {
     snakeBody[i].classList.add('snakeBody');
     }
+    ateFood()
 }
 
 
 let interval = setInterval(move, 300)
+
+function ateFood() {
+    const coordinatesSnake = [snakeBody[0].getAttribute('data-X'), snakeBody[0].getAttribute('data-Y')];
+    // console.log('coordinatesSnake!!!: ', coordinatesSnake);
+    const food = Array.from(document.getElementsByClassName('food'));
+    console.log('food!!: ', food);
+    const coordinatesFood = [food[0].getAttribute('data-X'), food[0].getAttribute('data-Y')];
+    console.log('coordinatesFood!!!!!!!!!!!!! : ', coordinatesFood );
+    // console.log('JSON.stringify(coordinatesFood): ', JSON.stringify(coordinatesFood));
+    // console.log('stringify(coordinatesSnake): ', JSON.stringify(coordinatesSnake));
+    let newFood = new Coordinate(showRandomSnake(), 'food');
+    let coordinat = [ ];
+    if (JSON.stringify(coordinatesSnake) == JSON.stringify(coordinatesFood)) {
+        // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        food[0].classList.remove('food');
+        
+        newFood.showRadom()
+        addinfBodeSnake()
+        console.log('coordinat%%%%%%%%%%%%%%%%%%%%%%%: ', coordinat);
+        let newCoordinatesFood = [food[0].getAttribute('data-X'), food[0].getAttribute('data-Y')];
+        coordinat.unshift(newCoordinatesFood);  
+        food.splice(2, 4);
+    } 
+}
+
+// ф-ция сработает, когда змея съест еду
+function addinfBodeSnake() {
+    let newSnakeItemBody = [ ];
+    
+    let addingLeft = [snakeBody[0].getAttribute('data-X'), snakeBody[0].getAttribute('data-Y')];
+    if (direction == "ArrowUp") {
+        
+        console.log('addingLeft)))))))))))((((((((((((())))))))))))): ', addingLeft);
+        newSnakeItemBody.push(document.querySelector('[data-X = "' + addingLeft[0] + '"][data-Y = "' + (+addingLeft[1] - 1) + '"]'));
+        newSnakeItemBody[newSnakeItemBody.length - 1].classList.add('snakeBody')
+    }
+}
