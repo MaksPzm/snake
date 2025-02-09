@@ -66,6 +66,7 @@ display: none;
 .kube {
     width: 60px;
     height: 60px;
+    z-index: 1;
 }
 
 
@@ -74,10 +75,25 @@ display: none;
 }
 
 
-.snakeBody:last-child {
+.snakeHead {
+    background-color: blue;
+    border-radius: 10px;
+}
+
+.gameOver {
+    background-color: rgb(83, 31, 31);
     border-radius: 50%;
 }
 
 .food {
     background-color: red;
+}
+
+.gameOverText {
+    width: 600px;
+    text-align: center;
+    z-index: 2;
+    font-size: 40px;
+    justify-self: center;
+    align-self: center;
 }
