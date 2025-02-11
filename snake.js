@@ -1,6 +1,8 @@
 const fild = document.querySelector('.game');
 const color = ['red', 'blue', 'green', 'orange'];
 let result = Array.from(document.querySelectorAll('.result'));
+result[1].innerText = window.localStorage.getItem('value');
+
 // создаём кубы игравого поля через класс
 class Filds {
     constructor(coordinatesX, coordinatesY) {
@@ -161,7 +163,6 @@ function move() {
     //устанавливаем, что должно произойти если змея коснется саму себя
     if (snakeBody[0].classList.contains('snakeBody')) {
         gameOver()
-        result[1].innerText = result[0];
     }
     
     snakeBody[0].classList.add('snakeHead');
@@ -274,8 +275,23 @@ function gameOver() {
 
 // показываем счёт
 function showResult() {
-    for (let i = 1; i < snakeBody.length - 1; i++) {
+    let i;
+    // result[0] = 0;
+    // result[1] = 0;
+    for (i = 1; i < snakeBody.length - 1; i++) {
         result[0].innerText = 0 + i;
+        
+        // result[0].innerHTML = `<p class="newText">${i}</p>`
+        if (result[1].innerText < result[0].innerText) {
+            window.localStorage.setItem('value', `${result[0].innerText}`);
+            console.log('Вход');
+            
+            result[1].innerText = window.localStorage.getItem('value');
+           
+            
+            // result[1].innerText = result[0]
+            // result[0] = result[1];
+        }
     }
 }
 
