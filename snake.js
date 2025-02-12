@@ -178,11 +178,13 @@ function move() {
 
 const buttonStart = document.querySelector('.buttonStart');
 const restart = document.querySelector('.buttonRestart');
+const getDifficultyLevel = document.querySelector('.difficultyLevel'); // поиск блока выбора сложности
 // кнопка play
 buttonStart.addEventListener('click', function() {
-    interval = setInterval(move, 200);
+    interval = setInterval(move, complexity);
     buttonStart.classList.remove('active');
     restart.classList.add('active');
+    getDifficultyLevel.setAttribute('hidden', 'hidden'); // добавляем атрибут, для того что бы панель выбора сложности выкл
 });
 
 
@@ -269,6 +271,7 @@ function gameOver() {
         let i = 0;
         Text.style.color = color[i == color.length-1 ? 0 : i++];
     }, 300);
+    getDifficultyLevel.removeAttribute('hidden'); // удаляем атрибут, для того что бы панель выбора сложности вкл
 }
 
 
@@ -287,3 +290,39 @@ function showResult() {
 }
 
 
+
+function difficultyLevel() {
+    const input = Array.from(document.getElementsByClassName('input'));
+    input.forEach((value) => {
+        
+        value.addEventListener('click', function() {
+            console.log(value.checked);
+            if (value.checked) {
+                input.forEach((index) => {
+                    index.removeAttribute('checked');
+                    index.checked = false;
+                })
+            } 
+            value.setAttribute('checked', 'checked')
+            value.checked = true;
+            if (input[0].hasAttribute('checked')) {
+                complexity = 200;
+            } else if (input[1].hasAttribute('checked')) {
+                console.log('22222');
+                complexity = 120;
+            } else if (input[2].hasAttribute('checked')) {
+                complexity = 80;
+            }
+        })
+    })
+}
+
+difficultyLevel()
+
+var complexity = 200; // сложность по умолчанию
+
+const formBtn = document.querySelector('.form__btn');
+
+formBtn.addEventListener('click', function() {
+    getDifficultyLevel.setAttribute('hidden', 'hidden'); // добавляем атрибут, для того что бы панель выбора сложности выкл при нажатии на кнопку
+})

@@ -12,6 +12,7 @@ body {
     border: 10px solid rgb(8, 68, 8);
     background-color: rgb(19, 94, 19);
     margin-top: 50px;
+    position: relative;
 }
 
 .menuResult {
@@ -101,4 +102,51 @@ display: none;
     font-family: Arial, Helvetica, sans-serif;
     justify-self: center;
     align-self: center;
+}
+
+/* настройка поля сложности */
+
+.difficultyLevel {
+    position: absolute;
+    left: -9px;
+    width: 600px;
+    height: 100px;
+    border: 10px solid rgb(8, 68, 8);
+    background-color: rgb(19, 94, 19);
+}
+
+.difficultyLevel__title {
+    margin: 0;
+    text-align: center;
+    font: 1.5em 'Arial', sans-serif;
+    margin-top: 10px;
+}
+
+.form {
+    font: 1.4em 'Arial', sans-serif;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.form__btn {
+    font: 1rem 'Arial', sans-serif;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: aqua;
+    cursor: pointer;
+}
+
+.form__btn:hover {
+    background-color: aquamarine;
+}
+
+label {
+    cursor: pointer;
+}
+
+.input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
