@@ -2,6 +2,7 @@ const fild = document.querySelector('.game');
 const color = ['red', 'blue', 'green', 'orange'];
 let result = Array.from(document.querySelectorAll('.result'));
 result[1].innerText = window.localStorage.getItem('value');
+// window.localStorage.clear()
 
 // создаём кубы игравого поля через класс
 class Filds {
@@ -179,7 +180,7 @@ const buttonStart = document.querySelector('.buttonStart');
 const restart = document.querySelector('.buttonRestart');
 // кнопка play
 buttonStart.addEventListener('click', function() {
-    interval = setInterval(move, 300);
+    interval = setInterval(move, 200);
     buttonStart.classList.remove('active');
     restart.classList.add('active');
 });
@@ -198,7 +199,6 @@ window.addEventListener('keydown', function (e) {
 restart.addEventListener('click', function() {
     location.reload()
 });
-
 
 
 // записывает нажатия кнопки направления в переменную, для того что бы нельзя было резко поменять направление на противоположное
@@ -276,21 +276,12 @@ function gameOver() {
 // показываем счёт
 function showResult() {
     let i;
-    // result[0] = 0;
-    // result[1] = 0;
     for (i = 1; i < snakeBody.length - 1; i++) {
-        result[0].innerText = 0 + i;
-        
-        // result[0].innerHTML = `<p class="newText">${i}</p>`
-        if (result[1].innerText < result[0].innerText) {
-            window.localStorage.setItem('value', `${result[0].innerText}`);
-            console.log('Вход');
-            
+        result[0].innerText = +i;
+        if (+result[1].innerText < +result[0].innerText) {
+            window.localStorage.setItem('value', `${+result[0].innerText}`);
+            // console.log('Вход');
             result[1].innerText = window.localStorage.getItem('value');
-           
-            
-            // result[1].innerText = result[0]
-            // result[0] = result[1];
         }
     }
 }
