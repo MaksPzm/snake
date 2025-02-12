@@ -256,9 +256,6 @@ function addinfBodeSnake() {
     }
 }
 
-
-console.log('result: ', result);
-
 // конец игре
 function gameOver() {
     clearInterval(interval);
@@ -274,8 +271,6 @@ function gameOver() {
     getDifficultyLevel.removeAttribute('hidden'); // удаляем атрибут, для того что бы панель выбора сложности вкл
 }
 
-
-
 // показываем счёт
 function showResult() {
     let i;
@@ -289,8 +284,7 @@ function showResult() {
     }
 }
 
-
-
+// ф-ция выбора сложности
 function difficultyLevel() {
     const input = Array.from(document.getElementsByClassName('input'));
     input.forEach((value) => {
